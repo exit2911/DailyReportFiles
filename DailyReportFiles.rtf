@@ -1,98 +1,142 @@
-{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
-{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\margl1440\margr1440\vieww10800\viewh8400\viewkind0
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
-\f0\fs24 \cf0 Sub ClearAccruedInterest()\
- \
- \
-Dim sdate As Date\
- \
-If Format(Date, "dddd") = "Monday" Then\
-    sdate = Date - 3\
-   \
-ElseIf Format(Date, "dddd") <> "Monday" Then\
-    sdate = Date - 1\
- \
-End If\
- \
-' Accrued Interest\
- \
-   ChDir _\
-     "S:\\CDO\\CDO - Columbia\\Deals A-D\\Clear Creek CLO\\1 Working Documents\\Cash"\
-       \
-    Workbooks.Open filename:= _\
-     "S:\\CDO\\CDO - Columbia\\Deals A-D\\Clear Creek CLO\\1 Working Documents\\Cash\\a.xlsx"\
-   \
-    \
-    \
-   Sheets("CDOExport").Copy\
-  \
-   \
-   With ActiveWorkbook\
-    .SaveAs filename:="S:\\CDO\\CDO - Columbia\\Deals A-D\\Clear Creek CLO\\1 Working Documents\\Cash\\Accrued Interest Report_" & Format(sdate, "YYYYmmdd") & ".xls", FileFormat:=xlOpenXMLWorkbook\
-    .Close SaveChanges:=True\
-   \
-    \
-    End With\
-   \
-    \
-' Contract Level\
-   \
-    \
-    Workbooks.Open filename:= _\
-     "S:\\CDO\\CDO - Columbia\\Deals A-D\\Clear Creek CLO\\1 Working Documents\\Cash\\c.xlsx"\
-   \
-    \
-    \
-   Sheets(2).Copy\
- \
-   \
-   With ActiveWorkbook\
-    .SaveAs filename:="S:\\CDO\\CDO - Columbia\\Deals A-D\\Clear Creek CLO\\1 Working Documents\\Cash\\Contract Level Detail_" & Format(sdate, "YYYYmmdd") & ".xls", FileFormat:=xlOpenXMLWorkbook\
-    .Close SaveChanges:=True\
-   \
-    \
-   End With\
- \
-' Holding File\
- \
- \
-   Workbooks.Open filename:= _\
-     "S:\\CDO\\CDO - Columbia\\Deals A-D\\Clear Creek CLO\\1 Working Documents\\Cash\\h.xlsx"\
-   \
-    \
-    \
-   Sheets(2).Copy\
-  \
-   \
-   With ActiveWorkbook\
-    .SaveAs filename:="S:\\CDO\\CDO - Columbia\\Deals A-D\\Clear Creek CLO\\1 Working Documents\\Cash\\ClearCreek_Holdings_" & Format(sdate, "YYYYmmdd") & ".xls", FileFormat:=xlOpenXMLWorkbook\
-    .Close SaveChanges:=True\
-   \
-    \
-   End With\
- \
-' Cash log dist. file\
- \
- \
-    Workbooks.Open filename:="S:\\CDO\\CDO - Columbia\\Deals A-D\\Clear Creek CLO\\1 Working Documents\\Cash\\Clear Creek CLO Ltd - Cash Log_template_" & Format(sdate, "mm.dd.YYYY") & ".xlsm"\
-   \
-    \
-    \
-   Sheets("Cash Flow").Copy\
-  \
-   \
-   With ActiveWorkbook\
-    .SaveAs filename:="S:\\CDO\\CDO - Columbia\\Deals A-D\\Clear Creek CLO\\1 Working Documents\\Cash\\Clear Creek Cash Rec_Dist_" & Format(sdate, "YYYYmmdd") & ".xls", FileFormat:=xlOpenXMLWorkbook\
-    .Close SaveChanges:=True\
-   \
-    End With\
-  \
-    \
-    \
- \
-End Sub\
- }
+
+Sub Duplicate4Deals()
+'  CREEK SOURCE DUPLICATE CASH LOGS
+
+' Copy reporting sheet
+
+'  Holding File
+
+Dim sdate As Date
+Dim tdate As Date
+If Format(Date, "dddd") = "Monday" Then
+    sdate = Date - 3
+
+    
+ElseIf Format(Date, "dddd") <> "Monday" Then
+    sdate = Date - 1
+    
+End If
+
+'GCP CLO 38
+
+tdate = Date
+    
+
+ChDir _
+    "S:\CDO\CDO - Columbia\Deals E-L\Golub Capital Partners CLO 38\Working\Cash"
+    Workbooks.Open filename:="S:\CDO\CDO - Columbia\Deals E-L\Golub Capital Partners CLO 38\Working\Cash\Golub Capital Partners CLO 38(M) LTD - Cash Log_" & Format(sdate, "mm.dd.YYYY") & ".xlsm"
+
+ With ActiveWorkbook
+    .SaveAs filename:="S:\CDO\CDO - Columbia\Deals E-L\Golub Capital Partners CLO 38\Working\Cash\Golub Capital Partners CLO 38(M) LTD - Cash Log_" & Format(tdate, "mm.dd.YYYY") & ".xlsm", FileFormat:=xlOpenXMLWorkbookMacroEnabled
+    .Close SaveChanges:=True
+   
+    End With
+    
+'CREEK SOURCE
+
+
+ChDir _
+     "S:\CDO\CDO - Columbia\Deals A-D\Creek Source\1 Working Documents\Cash"
+        
+  
+    Workbooks.Open filename:="S:\CDO\CDO - Columbia\Deals A-D\Creek Source\1 Working Documents\Cash\Creek Source - Cash Log_" & Format(sdate, "mm.dd.YYYY") & ".xlsm"
+   
+ With ActiveWorkbook
+    .SaveAs filename:="S:\CDO\CDO - Columbia\Deals A-D\Creek Source\1 Working Documents\Cash\Creek Source - Cash Log_" & Format(tdate, "mm.dd.YYYY") & ".xlsm", FileFormat:=xlOpenXMLWorkbookMacroEnabled
+    .Close SaveChanges:=True
+    
+    
+    End With
+    
+
+    '  PEARLS IX LLC DUPLICATE CASH LOGS
+    
+  
+ChDir _
+     "S:\CDO\CDO - Columbia\Deals M-R\Pearls IX LLC\Working Documents\Reviewed and Approved\Cash Processing"
+        
+  
+    Workbooks.Open filename:="S:\CDO\CDO - Columbia\Deals M-R\Pearls IX LLC\Working Documents\Reviewed and Approved\Cash Processing\Pearls IX LLC - Cash Log_template - " & Format(sdate, "mm.dd.YYYY") & ".xlsm"
+   
+ With ActiveWorkbook
+    .SaveAs filename:="S:\CDO\CDO - Columbia\Deals M-R\Pearls IX LLC\Working Documents\Reviewed and Approved\Cash Processing\Pearls IX LLC - Cash Log_template - " & Format(tdate, "mm.dd.YYYY") & ".xlsm", FileFormat:=xlOpenXMLWorkbookMacroEnabled
+    .Close SaveChanges:=True
+    
+    End With
+ 
+ '  GCP F5 DUPLICATE CASH LOG
+ 
+  
+ChDir _
+     "S:\CDO\CDO - Columbia\Deals E-L\GCP 5 Ltd\Cash\Daily Cash"
+        
+  
+    Workbooks.Open filename:="S:\CDO\CDO - Columbia\Deals E-L\GCP 5 Ltd\Cash\Daily Cash\GCP Finance 5 LTD - Cash Log_" & Format(sdate, "mm.dd.YYYY") & ".xlsm"
+   
+    With ActiveWorkbook
+    .SaveAs filename:="S:\CDO\CDO - Columbia\Deals E-L\GCP 5 Ltd\Cash\Daily Cash\GCP Finance 5 LTD - Cash Log_" & Format(tdate, "mm.dd.YYYY") & ".xlsm", FileFormat:=xlOpenXMLWorkbookMacroEnabled
+    .Close SaveChanges:=True
+    
+    End With
+ 
+    
+    ' CREEK SOURCE 2017-1 DUPLICATE CASH LOG
+    
+  
+    Workbooks.Open filename:="S:\CDO\CDO - Columbia\Deals A-D\Creek Source\CreekSource Series 2017-1\1 Working Document\Cash\CreekSource Series 2017-1 - Cash Log_template_" & Format(sdate, "mm.dd.YYYY") & ".xlsm"
+   
+    With ActiveWorkbook
+    .SaveAs filename:="S:\CDO\CDO - Columbia\Deals A-D\Creek Source\CreekSource Series 2017-1\1 Working Document\Cash\CreekSource Series 2017-1 - Cash Log_template_" & Format(tdate, "mm.dd.YYYY") & ".xlsm", FileFormat:=xlOpenXMLWorkbookMacroEnabled
+    .Close SaveChanges:=True
+    
+    End With
+    
+    ' CLEAR CREEK DUPLICATE CASH LOG
+      
+ChDir _
+     "S:\CDO\CDO - Columbia\Deals A-D\Clear Creek CLO\1 Working Documents\Cash"
+     
+     
+     Workbooks.Open filename:="S:\CDO\CDO - Columbia\Deals A-D\Clear Creek CLO\1 Working Documents\Cash\Clear Creek CLO Ltd - Cash Log_template_" & Format(sdate, "mm.dd.YYYY") & ".xlsm"
+   
+    With ActiveWorkbook
+    .SaveAs filename:="S:\CDO\CDO - Columbia\Deals A-D\Clear Creek CLO\1 Working Documents\Cash\Clear Creek CLO Ltd - Cash Log_template_" & Format(tdate, "mm.dd.YYYY") & ".xlsm", FileFormat:=xlOpenXMLWorkbookMacroEnabled
+    .Close SaveChanges:=True
+    
+    End With
+ 
+ ' PEARLS IX LP
+ChDir _
+    "S:\CDO\CDO - Columbia\Deals M-R\Pearls IX LP\Working Documents\Reviewed and Approved\Cash Processing\2018"
+     
+     
+        
+     Workbooks.Open filename:="S:\CDO\CDO - Columbia\Deals M-R\Pearls IX LP\Working Documents\Reviewed and Approved\Cash Processing\2018\Pearls IX LP - Cash Log_template_" & Format(sdate, "mm.dd.YYYY") & ".xlsm"
+   
+    With ActiveWorkbook
+    .SaveAs filename:="S:\CDO\CDO - Columbia\Deals M-R\Pearls IX LP\Working Documents\Reviewed and Approved\Cash Processing\2018\Pearls IX LP - Cash Log_template_" & Format(tdate, "mm.dd.YYYY") & ".xlsm", FileFormat:=xlOpenXMLWorkbookMacroEnabled
+    .Close SaveChanges:=True
+    
+    End With
+    
+    ' CLO 24
+    
+    
+  ChDir _
+    "S:\CDO\CDO - Columbia\Deals E-L\Golub Capital Partners CLO 24(M), Ltd\Working Documents\Cash\Golub CLO 24 M-R"
+     
+     
+        
+     Workbooks.Open filename:="S:\CDO\CDO - Columbia\Deals E-L\Golub Capital Partners CLO 24(M), Ltd\Working Documents\Cash\Golub CLO 24 M-R\Golub Capital Partners CLO 24-R - Cash Log_Template_" & Format(sdate, "mm.dd.YYYY") & ".xlsm"
+   
+    With ActiveWorkbook
+    .SaveAs filename:="S:\CDO\CDO - Columbia\Deals E-L\Golub Capital Partners CLO 24(M), Ltd\Working Documents\Cash\Golub CLO 24 M-R\Golub Capital Partners CLO 24-R - Cash Log_Template_" & Format(tdate, "mm.dd.YYYY") & ".xlsm", FileFormat:=xlOpenXMLWorkbookMacroEnabled
+    .Close SaveChanges:=True
+    
+    End With
+      
+    
+
+
+End Sub
